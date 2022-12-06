@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ especialidad.descripcion }}</h1>
+<ul>
+{% for medico in especialidad.medico_set.all %}
+    <li><a href="{% url 'agenda:medico' medico.id %}">{{ medico.nombres }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
