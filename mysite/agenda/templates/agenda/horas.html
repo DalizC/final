@@ -1,6 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="doctors" class="doctors">
+    <div class="container">
 <h1>{{ medico.nombres }}</h1>
 <ul>
 {% for hora in medico.agenda_set.all %}
     <li>{{ hora.fecha }} {{hora.hora_desde}} - {{hora.hora_hasta}}</a></li>
 {% endfor %}
 </ul>
+{% endblock %}
+</div>
+</section>

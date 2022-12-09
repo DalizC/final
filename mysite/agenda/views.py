@@ -6,16 +6,16 @@ from django.contrib.auth.decorators import login_required
 from .models import Especialidad, Medico
 
 
-@login_required
-def index(request):
+# @login_required
+def especialidades(request):
     especialidades_all_list = Especialidad.objects.order_by('-descripcion')
     context = {'especialidades_all_list': especialidades_all_list}
-    return render(request, 'agenda/index.html', context)
+    return render(request, 'agenda/especialidades.html', context)
 
 
-def detail(request, especialidad_id):
+def medicos(request, especialidad_id):
     especialidad = get_object_or_404(Especialidad, pk=especialidad_id)
-    return render(request, 'agenda/detail.html', {'especialidad': especialidad})
+    return render(request, 'agenda/medicos.html', {'especialidad': especialidad})
 
 
 def medico(request, medico_id):
