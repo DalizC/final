@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.urls import reverse
 from datetime import date, timedelta
 
-from .models import Especialidad, Medico, Agenda
+from .models import Cita, Especialidad, Medico, Agenda
 
 
 # @login_required
@@ -34,6 +34,16 @@ def agendar(request):
     context = {'especialidades_all_list': especialidades_all_list,
                'medicos_all_list': medicos_all_list}
     return render(request, 'agenda/agendar.html', context)
+
+
+def agendar_hora(request):
+    if request.method == 'POST':
+        hora_id = request.POST['flexRadioDefault']
+        paciente = request.POST['user_id']
+
+        cita = Cita(agenda_id=hora_id, paciente_id=paciente)
+        cita.save()
+    return render(request, 'home.html')
 
 
 def medicos(request):

@@ -71,6 +71,7 @@ function clickedItem(especialidad_id, especialidad_descripcion){
       +`<h4>${element.nombres} ${element.apellidos}</h4>`
       +`<span>${especialidad_descripcion}</span>`
       +'<p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>'
+      +`<a href="/agendar/medico/${element.id}">Agendar Hora</a>`
       +'<div class="social">'
       +'<a href=""><i class="ri-twitter-fill"></i></a>'
       +'<a href=""><i class="ri-facebook-fill"></i></a>'

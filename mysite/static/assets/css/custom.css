@@ -17,6 +17,6 @@
     border: 1px solid #1977cc;
 }
 
-.agendar-btn {
+.form-check-input[type=radio] {
     float: right;
 }

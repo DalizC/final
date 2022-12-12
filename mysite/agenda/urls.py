@@ -7,7 +7,7 @@ urlpatterns = [
     # ex: /agenda/
     path('', views.especialidades, name='especialidades'),
     path('medicos', views.medicos, name='medicos'),
-    # path('/agendar_hora', views.agendar, name='agendar'),
+    path('agendar_hora', views.agendar_hora, name='agendar'),
     # ex: /agenda/login
     # path('login', views.login, name='login'),
     # ex: /agenda/logout

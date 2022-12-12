@@ -53,7 +53,7 @@
             <h4>Walter White</h4>
             <span>{{ medico.especialidad }}</span>
             <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-            <button>Agendar Hora</button>
+            <a href="{% url 'agenda:medico' medico.id %}">Agendar Hora</a>
           </div>
         </div>
       </div>
