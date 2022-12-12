@@ -8,3 +8,15 @@
 #especialidades {
     margin-top: 12em;
 }
+
+.agenda-list {
+    padding-bottom: 30px !important;
+}
+
+.agenda-list li {
+    border: 1px solid #1977cc;
+}
+
+.agendar-btn {
+    float: right;
+}

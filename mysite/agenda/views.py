@@ -5,8 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.urls import reverse
+from datetime import date, timedelta
 
-from .models import Especialidad, Medico
+from .models import Especialidad, Medico, Agenda
 
 
 # @login_required
@@ -44,7 +45,18 @@ def medicos(request):
 
 def medico(request, medico_id):
     medico = get_object_or_404(Medico, pk=medico_id)
-    return render(request, 'agenda/horas.html', {'medico': medico})
+    startdate = date.today()
+    enddate = startdate + timedelta(days=6)
+    result = Agenda.objects.filter(
+        fecha__range=[startdate, enddate], medico__id=medico.id)
+    agenda = [[], []]
+    for row in result:
+        if row.fecha == startdate:
+            agenda[0].append(row)
+        else:
+            agenda[1].append(row)
+
+    return render(request, 'agenda/horas.html', {'medico': medico, 'agenda': agenda})
 
 
 def results(request, question_id):
