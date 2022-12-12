@@ -1,0 +1,10 @@
+#especialidades .icon-box {
+    text-align: center;
+    border: 1px solid #d5e1ed;
+    padding: 50px 0px;
+    transition: all ease-in-out 0.3s;
+}
+
+#especialidades {
+    margin-top: 12em;
+}

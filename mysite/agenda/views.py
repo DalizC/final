@@ -1,7 +1,10 @@
+import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.urls import reverse
 
 from .models import Especialidad, Medico
 
@@ -9,13 +12,34 @@ from .models import Especialidad, Medico
 # @login_required
 def especialidades(request):
     especialidades_all_list = Especialidad.objects.order_by('-descripcion')
-    context = {'especialidades_all_list': especialidades_all_list}
+    medicos_all_list = Medico.objects.all()
+    context = {'especialidades_all_list': especialidades_all_list,
+               'medicos_all_list': medicos_all_list,
+               'medicos_url': reverse('agenda:medicos')
+               }
     return render(request, 'agenda/especialidades.html', context)
 
 
-def medicos(request, especialidad_id):
-    especialidad = get_object_or_404(Especialidad, pk=especialidad_id)
-    return render(request, 'agenda/medicos.html', {'especialidad': especialidad})
+def getMedicoByEspecialidad(self, *args, **kwargs):
+    filter_category = self.request.GET.get("filter_category")
+    queryset = Medico.objects.filter(Especialidad=filter_category)
+    queryset_filtered = queryset.filter()
+    return queryset_filtered
+
+
+def agendar(request):
+    especialidades_all_list = Especialidad.objects.order_by('-descripcion')
+    medicos_all_list = Medico.objects.all()
+    context = {'especialidades_all_list': especialidades_all_list,
+               'medicos_all_list': medicos_all_list}
+    return render(request, 'agenda/agendar.html', context)
+
+
+def medicos(request):
+    data = json.loads(request.body)
+    medicos = Medico.objects.filter(especialidad__id=data['id'])
+    # print(medicos)
+    return JsonResponse(list(medicos.values("id", "nombres", "apellidos")), safe=False)
 
 
 def medico(request, medico_id):
